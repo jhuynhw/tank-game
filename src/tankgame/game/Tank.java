@@ -1,8 +1,8 @@
-package tankrotationexample.game;
+package tankgame.game;
 
 
 
-import tankrotationexample.GameConstants;
+import tankgame.GameConstants;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -121,9 +121,6 @@ public class Tank{
         y += vy;
         checkBorder();
     }
-
-
-
 
     private void checkBorder() {
         if (x < 30) {

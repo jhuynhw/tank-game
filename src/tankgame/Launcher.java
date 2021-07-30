@@ -1,9 +1,9 @@
-package tankrotationexample;
+package tankgame;
 
 
-import tankrotationexample.game.TRE;
-import tankrotationexample.menus.EndGamePanel;
-import tankrotationexample.menus.StartMenuPanel;
+import tankgame.game.TankRotation;
+import tankgame.menus.EndGamePanel;
+import tankgame.menus.StartMenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +30,7 @@ public class Launcher {
      * run long running loops(or tasks) on Java Swing's main thread. This thread is
      * called the event dispatch thread.
      */
-    private TRE gamePanel;
+    private TankRotation gamePanel;
     /*
      * end panel is used to show the end game panel.  it will contain
      * two buttons restart and exit.
@@ -57,7 +57,7 @@ public class Launcher {
     private void initUIComponents(){
         this.mainPanel = new JPanel(); // create a new main panel
         this.startPanel = new StartMenuPanel(this); // create a new start panel
-        this.gamePanel = new TRE(this); // create a new game panel
+        this.gamePanel = new TankRotation(this); // create a new game panel
         this.gamePanel.gameInitialize(); // initialize game, but DO NOT start game
         this.endPanel = new EndGamePanel(this); // create a new end game pane;
         cl = new CardLayout(); // creating a new CardLayout Panel
