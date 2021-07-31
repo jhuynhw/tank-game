@@ -1,10 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tankgame.gameobjects;
-
+/*
+----------------------------
+Name: Johnathan Huynh
+Professor: Anthony Souza
+Class: CSC 413
+Assignment: Tank Game
+----------------------------
+*/
 
 import tankgame.GameConstants;
 import tankgame.Launcher;
@@ -22,10 +24,6 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
-/**
- *
- * @author anthony-pc
- */
 public class TankRotation extends JPanel implements Runnable {
 
     public static final int WORLD_WIDTH = 2000;

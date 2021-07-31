@@ -1,9 +1,10 @@
-package tankgame.gameobjects;/*
+package tankgame.gameobjects;
+/*
 ----------------------------
 Name: Johnathan Huynh
-Professor:
-Class: CSC
-Assignment: ASMT
+Professor: Anthony Souza
+Class: CSC 413
+Assignment: Tank Game
 ----------------------------
 */
 

@@ -1,6 +1,12 @@
 package tankgame.gameobjects;
-
-
+/*
+----------------------------
+Name: Johnathan Huynh
+Professor: Anthony Souza
+Class: CSC 413
+Assignment: Tank Game
+----------------------------
+*/
 
 import tankgame.GameConstants;
 
@@ -9,10 +15,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- *
- * @author anthony-pc
- */
 public class Tank extends GameObject {
 
     private int x;

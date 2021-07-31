@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tankgame.gameobjects;
-
+/*
+----------------------------
+Name: Johnathan Huynh
+Professor: Anthony Souza
+Class: CSC 413
+Assignment: Tank Game
+----------------------------
+*/
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
-/**
- *
- * @author anthony-pc
- */
 public class TankControl implements KeyListener {
 
     private Tank t1;

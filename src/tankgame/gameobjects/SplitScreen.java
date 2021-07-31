@@ -1,15 +1,17 @@
-package tankgame.gameobjects;/*
+package tankgame.gameobjects;
+/*
 ----------------------------
 Name: Johnathan Huynh
-Professor:
-Class: CSC
-Assignment: ASMT
+Professor: Anthony Souza
+Class: CSC 413
+Assignment: Tank Game
 ----------------------------
 */
 
 import java.awt.*;
 
 public class SplitScreen extends Hud {
+
     @Override
     public void drawImage(Graphics g) {
 
