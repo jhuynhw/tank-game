@@ -1,4 +1,4 @@
-package tankgame.game;/*
+package tankgame.gameobjects;/*
 ----------------------------
 Name: Johnathan Huynh
 Professor:
@@ -9,6 +9,9 @@ Assignment: ASMT
 
 import java.awt.*;
 
-public abstract class Wall {
-    public abstract void drawImage(Graphics g);
+public class MiniMap extends Hud {
+    @Override
+    public void drawImage(Graphics g) {
+
+    }
 }

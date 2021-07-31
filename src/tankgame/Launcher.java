@@ -1,7 +1,7 @@
 package tankgame;
 
 
-import tankgame.game.TankRotation;
+import tankgame.gameobjects.TankRotation;
 import tankgame.menus.EndGamePanel;
 import tankgame.menus.StartMenuPanel;
 

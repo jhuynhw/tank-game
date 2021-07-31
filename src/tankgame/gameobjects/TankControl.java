@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tankgame.game;
+package tankgame.gameobjects;
 
 
 import java.awt.event.KeyEvent;
@@ -52,8 +52,9 @@ public class TankControl implements KeyListener {
         if (keyPressed == right) {
             this.t1.toggleRightPressed();
         }
-        
-
+        if (keyPressed == shoot) {
+            this.t1.toggleShootPressed();
+        }
     }
 
     @Override
@@ -71,6 +72,8 @@ public class TankControl implements KeyListener {
         if (keyReleased  == right) {
             this.t1.unToggleRightPressed();
         }
-
+        if (keyReleased  == shoot) {
+            this.t1.unToggleShootPressed();
+        }
     }
 }

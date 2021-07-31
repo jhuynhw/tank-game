@@ -1,4 +1,4 @@
-package tankgame.game;/*
+package tankgame.gameobjects;/*
 ----------------------------
 Name: Johnathan Huynh
 Professor:
@@ -7,5 +7,5 @@ Assignment: ASMT
 ----------------------------
 */
 
-public class Bullet {
+public abstract class PowerUp extends GameObject {
 }

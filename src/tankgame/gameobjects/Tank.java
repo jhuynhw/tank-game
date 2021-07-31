@@ -1,4 +1,4 @@
-package tankgame.game;
+package tankgame.gameobjects;
 
 
 
@@ -7,13 +7,13 @@ import tankgame.GameConstants;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
  * @author anthony-pc
  */
-public class Tank{
-
+public class Tank extends GameObject {
 
     private int x;
     private int y;
@@ -23,24 +23,30 @@ public class Tank{
 
     private final int R = 2;
     private final float ROTATIONSPEED = 3.0f;
-
-
+    private Rectangle hitBox;
+    private ArrayList<Bullet> ammo;
 
     private BufferedImage img;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean RightPressed;
     private boolean LeftPressed;
+    private boolean ShootPressed;
 
 
-    Tank(int x, int y, int vx, int vy, int angle, BufferedImage img) {
+    Tank(int x, int y, int vx, int vy, float angle, BufferedImage img) {
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
         this.img = img;
         this.angle = angle;
+        this.hitBox = new Rectangle(x,y,this.img.getWidth(),this.img.getHeight());
+        this.ammo = new ArrayList<>();
+    }
 
+    public Rectangle getHitBox() {
+        return hitBox.getBounds();
     }
 
     void setX(int x){ this.x = x; }
@@ -63,6 +69,10 @@ public class Tank{
         this.LeftPressed = true;
     }
 
+    void toggleShootPressed() {
+        this.ShootPressed = true;
+    }
+
     void unToggleUpPressed() {
         this.UpPressed = false;
     }
@@ -79,6 +89,34 @@ public class Tank{
         this.LeftPressed = false;
     }
 
+    void unToggleShootPressed() {
+        this.ShootPressed = false;
+    }
+
+    public int getVy() {
+        return vy;
+    }
+
+    public void setVy(int vy) {
+        this.vy = vy;
+    }
+
+    public boolean isUpPressed() {
+        return UpPressed;
+    }
+
+    public boolean isDownPressed() {
+        return DownPressed;
+    }
+
+    public boolean isRightPressed() {
+        return RightPressed;
+    }
+
+    public boolean isLeftPressed() {
+        return LeftPressed;
+    }
+
     void update() {
         if (this.UpPressed) {
             this.moveForwards();
@@ -93,9 +131,11 @@ public class Tank{
         if (this.RightPressed) {
             this.rotateRight();
         }
-//        if (this.shootPressed) {
-//            this.shoot();
-//        }
+        if (this.ShootPressed && TankRotation.tick % 20 == 0) {
+            Bullet b = new Bullet(x,y,angle,TankRotation.bulletImage);
+            this.ammo.add(b);
+        }
+        this.ammo.forEach(bullet -> bullet.update());
     }
 
     private void rotateLeft() {
@@ -112,6 +152,7 @@ public class Tank{
         x -= vx;
         y -= vy;
         checkBorder();
+        this.hitBox.setLocation(x,y);
     }
 
     private void moveForwards() {
@@ -120,6 +161,7 @@ public class Tank{
         x += vx;
         y += vy;
         checkBorder();
+        this.hitBox.setLocation(x,y);
     }
 
     private void checkBorder() {
@@ -143,17 +185,17 @@ public class Tank{
     }
 
 
-    void drawImage(Graphics g) {
+    public void drawImage(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g; // use for walls class
         g2d.drawImage(this.img, rotation, null);
-
-        // copied from CSC 413 Term Project Starter Code Demo video 30:30
+        this.ammo.forEach(bullet -> bullet.drawImage(g));
         g2d.setColor(Color.RED);
+        g2d.drawRect(x,y,this.img.getWidth(), this.img.getHeight()); // draws rectangle to see hitbox
+        // copied from CSC 413 Term Project Starter Code Demo video 30:30
         // rotates screen around rectangle
         //g2d.rotate(Math.toRadians(angle), bounds.x + bounds.width/2, bounds.y + bounds.height/2);
-        g2d.drawRect(x,y,this.img.getWidth(), this.img.getHeight()); // use for walls class
     }
 
 

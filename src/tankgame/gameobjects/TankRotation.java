@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tankgame.game;
+package tankgame.gameobjects;
 
 
 import tankgame.GameConstants;
@@ -33,13 +33,14 @@ public class TankRotation extends JPanel implements Runnable {
     public static final int SCREEN_WIDTH = 1305; // 43 columns
     public static final int SCREEN_HEIGHT = 1000; // 32 rows
     private BufferedImage world;
+    public static BufferedImage bulletImage;
 //    public static BufferedImage bulletImage;
 //    private Graphics2D buffer;
 //    private JFrame jFrame;
     private Tank t1;
     private Tank t2;
     private Launcher lf;
-    private long tick = 0;
+    static long tick = 0;
 
     // WALLS
     ArrayList<Wall> walls;
@@ -53,11 +54,22 @@ public class TankRotation extends JPanel implements Runnable {
        try {
            this.resetGame();
            while (true) {
-                this.tick++;
-                this.t1.update(); // update tank1
-                this.t2.update(); // update tank2
-                this.repaint();   // redraw game
-                Thread.sleep(1000 / 144); //sleep for a few milliseconds
+               this.t1.update(); // update tank1
+               this.t2.update(); // update tank2
+               this.repaint();   // redraw game
+               if (this.t1.getHitBox().intersects(this.t2.getHitBox())) {
+//                   if(Tank.t1.isDownPressed()){
+//                       Tank.t1.setX(Tank.t1,getX() - Tank.t1.getVx());
+//                       Tank.t1.setY(Tank.t1,getY() - Tank.t1.getVx());
+//                   }
+//                   if(Tank.t2.isDownPressed()){
+//                       Tank.t2.setX(Tank.t2,getX() - Tank.t2.getVx());
+//                       Tank.t2.setY(Tank.t2,getY() - Tank.t2.getVx());
+//                   }
+                   System.out.println("TANKS HAVE HIT");
+               }
+               this.tick++;
+               Thread.sleep(1000 / 144); //sleep for a few milliseconds
                 /*
                  * simulate an end game event
                  * we will do this with by ending the game when drawn 2000 frames have been drawn
@@ -79,7 +91,7 @@ public class TankRotation extends JPanel implements Runnable {
         this.tick = 0;
         this.t1.setX(300);
         this.t1.setY(300);
-        this.t2.setX(500);
+        this.t2.setX(900);
         this.t2.setY(300);
     }
 
@@ -96,8 +108,9 @@ public class TankRotation extends JPanel implements Runnable {
         BufferedImage t1img = null;
         BufferedImage t2img = null;
         // WALLS
-        BufferedImage breakWall = null;
+        BufferedImage background = null;
         BufferedImage unbreakWall = null;
+        BufferedImage breakWall = null;
         walls = new ArrayList<>();
         try {
             /*
@@ -105,8 +118,10 @@ public class TankRotation extends JPanel implements Runnable {
              * current working directory.
              */
             t1img = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/tank1.png")));
-            t2img = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/tank2.png")));
+            t2img = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/tank1.png")));
+            TankRotation.bulletImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/bullet.png")));
             // WALLS
+//            background = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/background.jpg")));
             unbreakWall = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/unbreak.gif")));
             breakWall = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/break.gif")));
             InputStreamReader isr = new InputStreamReader(TankRotation.class.getClassLoader().getResourceAsStream("maps/map1"));
@@ -125,13 +140,16 @@ public class TankRotation extends JPanel implements Runnable {
                 mapInfo = row.split("\\s");
                 for(int curCol = 0; curCol < numCols; curCol++) {
                     switch(mapInfo[curCol]) {
+                        case "0":
+                            this.walls.add(new Background(curCol*30, curRow*30, background));
+                            break;
                         case "2":
                             // if sees "2", make breakable wall
-                            this.walls.add(new BreakWall(curCol*30, curRow*30, breakWall));
+                            this.walls.add(new BreakableWall(curCol*30, curRow*30, breakWall));
                             break;
                         case "3":
                         case "9":
-                            this.walls.add(new UnbreakWall(curCol*30, curRow*30, unbreakWall));
+                            this.walls.add(new UnbreakableWall(curCol*30, curRow*30, unbreakWall));
                             break;
                     }
                 }
@@ -161,7 +179,6 @@ public class TankRotation extends JPanel implements Runnable {
         buffer.fillRect(0,0,GameConstants.GAME_SCREEN_WIDTH,GameConstants.GAME_SCREEN_HEIGHT);
         // WALLS
         this.walls.forEach(wall -> wall.drawImage(buffer));
-//        this.walls.forEach(wall -> wall.drawImage(buffer));
 
         this.t1.drawImage(buffer);
         this.t2.drawImage(buffer);

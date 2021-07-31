@@ -1,14 +1,13 @@
-package tankgame.game;
+package tankgame.gameobjects;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 
-public class BreakWall extends Wall {
+public class Background extends Wall {
     int x, y;
     BufferedImage wallImage;
 
-    public BreakWall(int x, int y, BufferedImage wallImage) {
+    public Background(int x, int y, BufferedImage wallImage) {
         this.x = x;
         this.y = y;
         this.wallImage = wallImage;
