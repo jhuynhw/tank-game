@@ -12,7 +12,7 @@ import tankgame.GameConstants;
 
 import java.awt.*;
 
-public class HealthBar extends Hud{
+public class HealthBar {
     private Tank t1;
     private Tank t2;
 

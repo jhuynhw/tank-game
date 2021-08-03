@@ -62,7 +62,7 @@ public class Collisions {
     public static void collidesTank(GameObject tank, GameObject obj) {
         if(tank.getHitBox().intersects(obj.getHitBox()) && tank != obj) {
             tank.collision(obj);
-            System.out.println("tank collided with object");
+//            System.out.println("tank collided with object");
         }
     }
 

@@ -28,16 +28,12 @@ public class TankRotation extends JPanel implements Runnable {
 
     private BufferedImage world;
     public static BufferedImage bulletImage;
-//    public static BufferedImage bulletImage;
-//    private Graphics2D buffer;
-//    private JFrame jFrame;
+    public static BufferedImage heartImage;
     private Tank t1;
     private Tank t2;
     private Launcher lf;
     static long tick = 0;
-    private static ShieldPowerUp life;
 
-    // WALLS
     ArrayList<Wall> walls;
     ArrayList<PowerUp> powerUps;
     ArrayList<GameObject> gameObjects;
@@ -51,6 +47,7 @@ public class TankRotation extends JPanel implements Runnable {
        try {
            this.resetGame();
            while (true) {
+
                this.t1.update(); // update tank1
                this.t2.update(); // update tank2
 
@@ -80,7 +77,7 @@ public class TankRotation extends JPanel implements Runnable {
                  * simulate an end game event
                  * we will do this with by ending the game when drawn 2000 frames have been drawn
                  */
-                if(this.tick > 5000){
+                if(t1.getLives() <= 0 || t2.getLives() <= 0){
                     this.lf.setFrame("end");
                     return;
                 }
@@ -99,6 +96,8 @@ public class TankRotation extends JPanel implements Runnable {
         this.t1.setY(300);
         this.t2.setX(900);
         this.t2.setY(600);
+        this.t1.setLives(3);
+        this.t2.setLives(3);
     }
 
 
@@ -123,6 +122,7 @@ public class TankRotation extends JPanel implements Runnable {
              */
             t1img = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/tank1.png")));
             t2img = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/tank1.png")));
+            heartImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/heart.png")));
             TankRotation.bulletImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/bullet.png")));
             InputStreamReader isr = new InputStreamReader(TankRotation.class.getClassLoader().getResourceAsStream("maps/map1"));
             BufferedReader mapReader = new BufferedReader(isr);
@@ -177,9 +177,8 @@ public class TankRotation extends JPanel implements Runnable {
         // player 2 copied from vid CSC 413 Term Project Starter Code Demo 38:45
         t1 = new Tank(300, 300, 0, 0, 45, t1img);
         this.gameObjects.add(t1);
-        t2 = new Tank(500, 500, 0, 0, 225, t2img);
+        t2 = new Tank(900, 600, 0, 0, 225, t2img);
         this.gameObjects.add(t2);
-        life = new ShieldPowerUp(0,0);
         TankControl tc1 = new TankControl(t1,
                 KeyEvent.VK_UP,
                 KeyEvent.VK_DOWN,
@@ -238,15 +237,15 @@ public class TankRotation extends JPanel implements Runnable {
 
         int location, position;
         for(int i = 1; i <= t1.getLives(); i++){
-            location = (life.heartImage.getWidth() + 30) * i;
+            location = (heartImage.getWidth() + 30) * i;
             position = location/2 + GameConstants.GAME_SCREEN_WIDTH / 21;
-            g2.drawImage(life.heartImage, position, 10, null);
+            g2.drawImage(heartImage, position, 10, null);
         }
 
         for(int i = 1; i <= t2.getLives(); i++){
-            location = (life.heartImage.getWidth() + 40) * i;
+            location = (heartImage.getWidth() + 40) * i;
             position = location/2 + GameConstants.GAME_SCREEN_WIDTH - GameConstants.GAME_SCREEN_WIDTH / 2 + 170;
-            g2.drawImage(life.heartImage, position, 10, null);
+            g2.drawImage(heartImage, position, 10, null);
         }
 
         g2.setColor(Color.GREEN);

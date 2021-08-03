@@ -26,6 +26,8 @@ public class Tank extends GameObject {
     private int lives;
     private Point point;
     private int bulletVelocity;
+    private int spawnx;
+    private int spawny;
 
     private int R = 2;
     private final float ROTATIONSPEED = 2.0f;
@@ -41,6 +43,8 @@ public class Tank extends GameObject {
 
 
     Tank(int x, int y, int vx, int vy, float angle, BufferedImage img) {
+        this.spawnx = x;
+        this.spawny = y;
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -69,14 +73,6 @@ public class Tank extends GameObject {
         }
         if(obj instanceof Bullet) {
             this.health -= 25;
-            if(this.health <= 0) {
-                this.lives -= 1;
-                this.health = 100;
-            }
-            if(this. lives == 0) {
-                this.health = 0;
-                System.out.println("Winner!");
-            }
         }
         if (obj instanceof Wall){
             if (!obj.getHitBox().contains(point)){
@@ -245,6 +241,17 @@ public class Tank extends GameObject {
         }
         this.ammo.forEach(bullet -> bullet.update());
         this.hitBox.setLocation(x,y);
+
+        if(this.health <= 0) {
+            this.lives -= 1;
+            this.health = 100;
+            this.x = spawnx;
+            this.y = spawny;
+        }
+        if(this. lives == 0) {
+            this.health = 0;
+            System.out.println("Winner!");
+        }
     }
 
     private void rotateLeft() {
@@ -300,7 +307,7 @@ public class Tank extends GameObject {
         Graphics2D g2d = (Graphics2D) g; // use for walls class
         g2d.drawImage(this.img, rotation, null);
         this.ammo.forEach(bullet -> bullet.drawImage(g));
-        g2d.setColor(Color.RED);
+//        g2d.setColor(Color.RED);
         g2d.drawRect(x,y,this.img.getWidth(), this.img.getHeight()); // draws rectangle to see hitbox
         // copied from CSC 413 Term Project Starter Code Demo video 30:30
         // rotates screen around rectangle

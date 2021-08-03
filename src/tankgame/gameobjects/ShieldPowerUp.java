@@ -18,14 +18,13 @@ import static javax.imageio.ImageIO.read;
 public class ShieldPowerUp extends PowerUp {
     Rectangle hitBox;
     int x, y;
-    BufferedImage heartImage, shieldImage;
+    BufferedImage shieldImage;
     int totalLives;
 
     public ShieldPowerUp(int x, int y) {
         this.x = x;
         this.y = y;
         try {
-            heartImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/heart.png")));
             shieldImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/shield.png")));
         }
         catch (IOException ex) {
