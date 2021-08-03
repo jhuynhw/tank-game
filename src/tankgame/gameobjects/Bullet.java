@@ -3,7 +3,7 @@ package tankgame.gameobjects;
 ----------------------------
 Name: Johnathan Huynh
 Professor: Anthony Souza
-Class: CSC 413
+Class: CSC 413-01
 Assignment: Tank Game
 ----------------------------
 */
@@ -13,6 +13,10 @@ import tankgame.GameConstants;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 public class Bullet extends GameObject {
     int x, y, vx, vy;
@@ -20,6 +24,7 @@ public class Bullet extends GameObject {
     int R = 7;
     BufferedImage bulletImage;
     Rectangle hitBox;
+    boolean hasCollided = false;
 
     // todo: PLACEMENT OF BULLET CLASS CODE (and maybe TR) IS BAD, FIX OR MINUS HELLA POINTS
     public Bullet(int x, int y, float angle, BufferedImage bulletImage) {
@@ -35,7 +40,7 @@ public class Bullet extends GameObject {
         vy = (int) Math.round(R * Math.sin(Math.toRadians(angle)));
         x += vx;
         y += vy;
-        checkBorder();
+//        checkBorder();
         this.hitBox.setLocation(x,y);
     }
 
@@ -65,5 +70,32 @@ public class Bullet extends GameObject {
         g2d.drawImage(this.bulletImage, rotation, null);
         g2d.setColor(Color.RED);
         g2d.drawRect(x,y,this.bulletImage.getWidth(), this.bulletImage.getHeight());
+    }
+
+    @Override
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
+    @Override
+    public void collision(GameObject obj) {
+        if (obj instanceof Tank) {
+            try {
+                this.bulletImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/smallExplode.gif")));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            hasCollided = true;
+        }
+        if (obj instanceof Wall) {
+            try {
+                this.bulletImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/smallExplode.gif")));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            hasCollided = true;
+        }
     }
 }

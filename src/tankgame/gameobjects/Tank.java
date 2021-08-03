@@ -3,7 +3,7 @@ package tankgame.gameobjects;
 ----------------------------
 Name: Johnathan Huynh
 Professor: Anthony Souza
-Class: CSC 413
+Class: CSC 413-01
 Assignment: Tank Game
 ----------------------------
 */
@@ -22,9 +22,13 @@ public class Tank extends GameObject {
     private int vx;
     private int vy;
     private float angle;
+    private int health;
+    private int lives;
+    private Point point;
+    private int bulletVelocity;
 
-    private final int R = 2;
-    private final float ROTATIONSPEED = 3.0f;
+    private int R = 2;
+    private final float ROTATIONSPEED = 2.0f;
     private Rectangle hitBox;
     private ArrayList<Bullet> ammo;
 
@@ -45,15 +49,59 @@ public class Tank extends GameObject {
         this.angle = angle;
         this.hitBox = new Rectangle(x,y,this.img.getWidth(),this.img.getHeight());
         this.ammo = new ArrayList<>();
+        this.health = 100;
+        this.lives = 3;
+        this.point = new Point(this.x, this.y);
+        this.bulletVelocity = 20;
     }
 
     public Rectangle getHitBox() {
-        return hitBox.getBounds();
+        return hitBox;
     }
 
-    void setX(int x){ this.x = x; }
+    @Override
+    public void collision(GameObject obj) {
+        if (obj instanceof Tank){
+            if (!obj.getHitBox().contains(point)){
+                this.x = point.x;
+                this.y = point.y;
+            }
+        }
+        if(obj instanceof Bullet) {
+            this.health -= 25;
+            if(this.health <= 0) {
+                this.lives -= 1;
+                this.health = 100;
+            }
+            if(this. lives == 0) {
+                this.health = 0;
+                System.out.println("Winner!");
+            }
+        }
+        if (obj instanceof Wall){
+            if (!obj.getHitBox().contains(point)){
+                this.x = point.x;
+                this.y = point.y;
+            }
+        }
+        if (obj instanceof ShieldPowerUp) {
+            this.health = 150;
+        }
+        if (obj instanceof SpeedBoostPowerUp) {
+            this.R = 3;
+        }
+        if (obj instanceof SpeedShotPowerUp) {
+            bulletVelocity = 10;
+        }
+    }
 
-    void setY(int y) { this. y = y;}
+    void setX(int x) {
+        this.x = x;
+    }
+
+    void setY(int y) {
+        this. y = y;
+    }
 
     void toggleUpPressed() {
         this.UpPressed = true;
@@ -73,6 +121,10 @@ public class Tank extends GameObject {
 
     void toggleShootPressed() {
         this.ShootPressed = true;
+    }
+
+    public ArrayList<Bullet> getAmmo() {
+        return this.ammo;
     }
 
     void unToggleUpPressed() {
@@ -95,8 +147,30 @@ public class Tank extends GameObject {
         this.ShootPressed = false;
     }
 
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    public int getVx() {
+        return vx;
+    }
+
     public int getVy() {
         return vy;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public void setVy(int vy) {
@@ -119,7 +193,39 @@ public class Tank extends GameObject {
         return LeftPressed;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void healthPowerUp(int value) {
+        if(health + value >= 100){
+            health = 100;
+        }
+        else {
+            health += value;
+        }
+    }
+
+    public void addLife() {
+        this.lives += 1;
+    }
+
+    public void removeLife(){
+        if(lives == 0){
+            health = 0;
+        }
+        else {
+            lives -= 1;
+            healthPowerUp(100);
+        }
+    }
+
     void update() {
+        this.point.move(this.x, this.y);
         if (this.UpPressed) {
             this.moveForwards();
         }
@@ -133,11 +239,12 @@ public class Tank extends GameObject {
         if (this.RightPressed) {
             this.rotateRight();
         }
-        if (this.ShootPressed && TankRotation.tick % 20 == 0) {
-            Bullet b = new Bullet(x,y,angle,TankRotation.bulletImage);
+        if (this.ShootPressed && TankRotation.tick % bulletVelocity == 0) {
+            Bullet b = new Bullet(x + 12,y + 8,angle,TankRotation.bulletImage);
             this.ammo.add(b);
         }
         this.ammo.forEach(bullet -> bullet.update());
+        this.hitBox.setLocation(x,y);
     }
 
     private void rotateLeft() {
@@ -153,7 +260,7 @@ public class Tank extends GameObject {
         vy = (int) Math.round(R * Math.sin(Math.toRadians(angle)));
         x -= vx;
         y -= vy;
-        checkBorder();
+//        checkBorder();
         this.hitBox.setLocation(x,y);
     }
 
@@ -162,24 +269,24 @@ public class Tank extends GameObject {
         vy = (int) Math.round(R * Math.sin(Math.toRadians(angle)));
         x += vx;
         y += vy;
-        checkBorder();
+//        checkBorder();
         this.hitBox.setLocation(x,y);
     }
 
-    private void checkBorder() {
-        if (x < 30) {
-            x = 30;
-        }
-        if (x >= GameConstants.GAME_SCREEN_WIDTH - 88) {
-            x = GameConstants.GAME_SCREEN_WIDTH - 88;
-        }
-        if (y < 40) {
-            y = 40;
-        }
-        if (y >= GameConstants.GAME_SCREEN_HEIGHT - 80) {
-            y = GameConstants.GAME_SCREEN_HEIGHT - 80;
-        }
-    }
+//    private void checkBorder() {
+//        if (x < 30) {
+//            x = 30;
+//        }
+//        if (x >= GameConstants.WORLD_WIDTH - 100) {
+//            x = GameConstants.WORLD_WIDTH - 100;
+//        }
+//        if (y < 35) {
+//            y = 35;
+//        }
+//        if (y >= GameConstants.WORLD_HEIGHT - 115) {
+//            y = GameConstants.WORLD_HEIGHT - 115;
+//        }
+//    }
 
     @Override
     public String toString() {

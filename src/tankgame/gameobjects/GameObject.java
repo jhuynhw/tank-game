@@ -3,7 +3,7 @@ package tankgame.gameobjects;
 ----------------------------
 Name: Johnathan Huynh
 Professor: Anthony Souza
-Class: CSC 413
+Class: CSC 413-01
 Assignment: Tank Game
 ----------------------------
 */
@@ -29,6 +29,10 @@ public abstract class GameObject {
     }
 
     public abstract void drawImage(Graphics g);
+
+    public abstract Rectangle getHitBox();
+
+    public abstract void collision(GameObject obj);
 
 //    public abstract void update();
 //

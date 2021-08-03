@@ -15,16 +15,16 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
-public class SpeedBoostPowerUp extends PowerUp {
+public class SpeedShotPowerUp extends PowerUp {
     Rectangle hitBox;
     int x, y;
     BufferedImage speedImage;
 
-    public SpeedBoostPowerUp(int x, int y) {
+    public SpeedShotPowerUp(int x, int y) {
         this.x = x;
         this.y = y;
         try {
-            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedBoostPowerUp.png")));
+            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedShotPowerUp.png")));
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());
