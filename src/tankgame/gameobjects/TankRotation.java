@@ -228,7 +228,7 @@ public class TankRotation extends JPanel implements Runnable {
                         Math.min(t2.getY() - GameConstants.GAME_SCREEN_HEIGHT / 2, GameConstants.GAME_SCREEN_HEIGHT - GameConstants.GAME_SCREEN_HEIGHT) :
                         Math.max(t2.getY() - (GameConstants.GAME_SCREEN_HEIGHT / 2), 0),
                 GameConstants.GAME_SCREEN_WIDTH / 2, GameConstants.GAME_SCREEN_HEIGHT);
-        BufferedImage mm = world.getSubimage(0,0,GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT);
+        BufferedImage mm = world.getSubimage(0,0,GameConstants.MM_SCREEN_WIDTH, GameConstants.MM_SCREEN_HEIGHT);
         g2.drawImage(leftHalf,0,0,null);
         g2.drawImage(rightHalf,GameConstants.GAME_SCREEN_WIDTH/2 + 5,0,null);
         g2.drawImage(mm, GameConstants.GAME_SCREEN_WIDTH / 2 - GameConstants.WORLD_WIDTH / 15 + 12,
