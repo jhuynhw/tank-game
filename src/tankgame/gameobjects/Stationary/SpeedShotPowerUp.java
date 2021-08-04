@@ -1,4 +1,4 @@
-package tankgame.gameobjects;
+package tankgame.gameobjects.Stationary;
 /*
 ----------------------------
 Name: Johnathan Huynh
@@ -8,6 +8,9 @@ Assignment: Tank Game
 ----------------------------
 */
 
+import tankgame.gameobjects.GameObject;
+import tankgame.gameobjects.TankRotation;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,29 +18,28 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
-public class ShieldPowerUp extends PowerUp {
+public class SpeedShotPowerUp extends PowerUp {
     Rectangle hitBox;
     int x, y;
-    BufferedImage shieldImage;
-    int totalLives;
+    BufferedImage speedImage;
 
-    public ShieldPowerUp(int x, int y) {
+    public SpeedShotPowerUp(int x, int y) {
         this.x = x;
         this.y = y;
         try {
-            shieldImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/shield.png")));
+            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedShotPowerUp.png")));
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
-        this.hitBox = new Rectangle(this.x, this.y, this.shieldImage.getWidth(), this.shieldImage.getHeight());
+        this.hitBox = new Rectangle(this.x, this.y, this.speedImage.getWidth(), this.speedImage.getHeight());
     }
 
     @Override
     public void drawImage(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(this.shieldImage, x, y, null);
+        g2.drawImage(this.speedImage, x, y, null);
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ShieldPowerUp extends PowerUp {
         this.hitBox.x = 0;
         this.hitBox.y = 0;
         try {
-            shieldImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/background.png")));
+            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/background.png")));
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());

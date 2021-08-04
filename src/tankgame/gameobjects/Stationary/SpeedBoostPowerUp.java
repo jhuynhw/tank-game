@@ -1,4 +1,4 @@
-package tankgame.gameobjects;
+package tankgame.gameobjects.Stationary;
 /*
 ----------------------------
 Name: Johnathan Huynh
@@ -8,6 +8,9 @@ Assignment: Tank Game
 ----------------------------
 */
 
+import tankgame.gameobjects.GameObject;
+import tankgame.gameobjects.TankRotation;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,16 +18,16 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
-public class SpeedShotPowerUp extends PowerUp {
+public class SpeedBoostPowerUp extends PowerUp {
     Rectangle hitBox;
     int x, y;
     BufferedImage speedImage;
 
-    public SpeedShotPowerUp(int x, int y) {
+    public SpeedBoostPowerUp(int x, int y) {
         this.x = x;
         this.y = y;
         try {
-            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedShotPowerUp.png")));
+            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedBoostPowerUp.png")));
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());

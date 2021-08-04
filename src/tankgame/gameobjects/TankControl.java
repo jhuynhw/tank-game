@@ -8,6 +8,8 @@ Assignment: Tank Game
 ----------------------------
 */
 
+import tankgame.gameobjects.Moveable.Tank;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

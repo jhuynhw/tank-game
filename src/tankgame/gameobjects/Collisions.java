@@ -8,6 +8,10 @@ Assignment: Tank Game
 ----------------------------
 */
 
+import tankgame.gameobjects.Moveable.Tank;
+import tankgame.gameobjects.Stationary.PowerUp;
+import tankgame.gameobjects.Stationary.Wall;
+
 import java.util.ArrayList;
 
 public class Collisions {

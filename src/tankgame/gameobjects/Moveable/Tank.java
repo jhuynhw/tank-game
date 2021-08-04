@@ -1,4 +1,4 @@
-package tankgame.gameobjects;
+package tankgame.gameobjects.Moveable;
 /*
 ----------------------------
 Name: Johnathan Huynh
@@ -8,7 +8,11 @@ Assignment: Tank Game
 ----------------------------
 */
 
-import tankgame.GameConstants;
+import tankgame.gameobjects.*;
+import tankgame.gameobjects.Stationary.ShieldPowerUp;
+import tankgame.gameobjects.Stationary.SpeedBoostPowerUp;
+import tankgame.gameobjects.Stationary.SpeedShotPowerUp;
+import tankgame.gameobjects.Stationary.Wall;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -42,7 +46,7 @@ public class Tank extends GameObject {
     private boolean ShootPressed;
 
 
-    Tank(int x, int y, int vx, int vy, float angle, BufferedImage img) {
+    public Tank(int x, int y, int vx, int vy, float angle, BufferedImage img) {
         this.spawnx = x;
         this.spawny = y;
         this.x = x;
@@ -91,31 +95,31 @@ public class Tank extends GameObject {
         }
     }
 
-    void setX(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    void setY(int y) {
+    public void setY(int y) {
         this. y = y;
     }
 
-    void toggleUpPressed() {
+    public void toggleUpPressed() {
         this.UpPressed = true;
     }
 
-    void toggleDownPressed() {
+    public void toggleDownPressed() {
         this.DownPressed = true;
     }
 
-    void toggleRightPressed() {
+    public void toggleRightPressed() {
         this.RightPressed = true;
     }
 
-    void toggleLeftPressed() {
+    public void toggleLeftPressed() {
         this.LeftPressed = true;
     }
 
-    void toggleShootPressed() {
+    public void toggleShootPressed() {
         this.ShootPressed = true;
     }
 
@@ -123,23 +127,23 @@ public class Tank extends GameObject {
         return this.ammo;
     }
 
-    void unToggleUpPressed() {
+    public void unToggleUpPressed() {
         this.UpPressed = false;
     }
 
-    void unToggleDownPressed() {
+    public void unToggleDownPressed() {
         this.DownPressed = false;
     }
 
-    void unToggleRightPressed() {
+    public void unToggleRightPressed() {
         this.RightPressed = false;
     }
 
-    void unToggleLeftPressed() {
+    public void unToggleLeftPressed() {
         this.LeftPressed = false;
     }
 
-    void unToggleShootPressed() {
+    public void unToggleShootPressed() {
         this.ShootPressed = false;
     }
 
@@ -220,7 +224,7 @@ public class Tank extends GameObject {
         }
     }
 
-    void update() {
+    public void update() {
         this.point.move(this.x, this.y);
         if (this.UpPressed) {
             this.moveForwards();

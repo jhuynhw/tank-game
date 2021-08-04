@@ -1,4 +1,4 @@
-package tankgame.gameobjects;
+package tankgame.gameobjects.Moveable;
 /*
 ----------------------------
 Name: Johnathan Huynh
@@ -9,6 +9,9 @@ Assignment: Tank Game
 */
 
 import tankgame.GameConstants;
+import tankgame.gameobjects.GameObject;
+import tankgame.gameobjects.TankRotation;
+import tankgame.gameobjects.Stationary.Wall;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -24,7 +27,7 @@ public class Bullet extends GameObject {
     int R = 7;
     BufferedImage bulletImage;
     Rectangle hitBox;
-    boolean hasCollided = false;
+    public boolean hasCollided = false;
 
     // todo: PLACEMENT OF BULLET CLASS CODE (and maybe TR) IS BAD, FIX OR MINUS HELLA POINTS
     public Bullet(int x, int y, float angle, BufferedImage bulletImage) {

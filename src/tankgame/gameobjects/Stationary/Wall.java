@@ -1,4 +1,4 @@
-package tankgame.gameobjects;
+package tankgame.gameobjects.Stationary;
 /*
 ----------------------------
 Name: Johnathan Huynh
@@ -8,8 +8,10 @@ Assignment: Tank Game
 ----------------------------
 */
 
+import tankgame.gameobjects.GameObject;
+
 import java.awt.*;
 
-public abstract class PowerUp extends GameObject {
+public abstract class Wall extends GameObject {
     public abstract void drawImage(Graphics g);
 }

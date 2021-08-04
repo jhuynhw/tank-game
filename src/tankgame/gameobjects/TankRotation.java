@@ -10,6 +10,8 @@ Assignment: Tank Game
 
 import tankgame.GameConstants;
 import tankgame.Launcher;
+import tankgame.gameobjects.Moveable.Tank;
+import tankgame.gameobjects.Stationary.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +34,7 @@ public class TankRotation extends JPanel implements Runnable {
     private Tank t1;
     private Tank t2;
     private Launcher lf;
-    static long tick = 0;
+    public static long tick = 0;
 
     ArrayList<Wall> walls;
     ArrayList<PowerUp> powerUps;
