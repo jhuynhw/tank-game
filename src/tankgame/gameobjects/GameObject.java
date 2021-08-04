@@ -9,16 +9,10 @@ Assignment: Tank Game
 */
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
     private int x;
     private int y;
-    private int vx;
-    private int vy;
-    private float angle;
-    private BufferedImage img;
-    private Rectangle r;
 
     public int getX() {
         return x;
@@ -34,7 +28,4 @@ public abstract class GameObject {
 
     public abstract void collision(GameObject obj);
 
-//    public abstract void update();
-//
-//    public abstract void collision(Class c);
 }
