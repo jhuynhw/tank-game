@@ -210,7 +210,7 @@ public class Tank extends GameObject {
         }
     }
 
-    public void addLife() {
+/*    public void addLife() {
         this.lives += 1;
     }
 
@@ -222,7 +222,7 @@ public class Tank extends GameObject {
             lives -= 1;
             healthPowerUp(100);
         }
-    }
+    }*/
 
     public void update() {
         this.point.move(this.x, this.y);
@@ -251,9 +251,13 @@ public class Tank extends GameObject {
             this.health = 100;
             this.x = spawnx;
             this.y = spawny;
+            this.R = 2;
+            this.bulletVelocity = 20;
         }
         if(this. lives == 0) {
             this.health = 0;
+            this.R = 2;
+            this.bulletVelocity = 20;
             System.out.println("Winner!");
         }
     }
