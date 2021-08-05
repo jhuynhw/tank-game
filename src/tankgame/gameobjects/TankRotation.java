@@ -98,8 +98,11 @@ public class TankRotation extends JPanel implements Runnable {
         this.t1.setY(300);
         this.t2.setX(900);
         this.t2.setY(600);
+        this.t1.setHealth(100);
+        this.t2.setHealth(100);
         this.t1.setLives(3);
         this.t2.setLives(3);
+        ResetGame.reset(this.gameObjects);
     }
 
 

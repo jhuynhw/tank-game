@@ -24,6 +24,7 @@ public class BreakableWall extends Wall {
     int x, y;
     BufferedImage wallImage;
     int health;
+    public boolean destroyedWall;
 
     public BreakableWall(int x, int y) {
         this.x = x;
@@ -37,6 +38,7 @@ public class BreakableWall extends Wall {
         }
         this.hitbox = new Rectangle(this.x, this.y, this.wallImage.getWidth(), this.wallImage.getHeight());
         this.health = 100;
+        this.destroyedWall = false;
     }
 
     @Override
@@ -59,6 +61,7 @@ public class BreakableWall extends Wall {
             try {
                 this.wallImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/brokenWall.png")));
                 setHitboxNone();
+                this.destroyedWall = true;
             }
             catch (IOException ex) {
                 System.out.println(ex.getMessage());
@@ -75,5 +78,27 @@ public class BreakableWall extends Wall {
     public void setHitboxNone() {
         this.hitbox.x = 0;
         this.hitbox.y = 0;
+    }
+
+    public boolean isDestroyedWall() {
+        return destroyedWall;
+    }
+
+    public void setDestroyedWall(boolean destroyedWall) {
+        this.destroyedWall = destroyedWall;
+    }
+
+    public void reset() {
+        this.x = x;
+        this.y = y;
+        try {
+            wallImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/breakableWall.png")));
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+        this.hitbox = new Rectangle(this.x, this.y, this.wallImage.getWidth(), this.wallImage.getHeight());
+        this.health = 100;
     }
 }

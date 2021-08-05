@@ -23,6 +23,7 @@ public class ShieldPowerUp extends PowerUp {
     int x, y;
     BufferedImage shieldImage;
     int totalLives;
+    public boolean captured;
 
     public ShieldPowerUp(int x, int y) {
         this.x = x;
@@ -35,12 +36,37 @@ public class ShieldPowerUp extends PowerUp {
             ex.printStackTrace();
         }
         this.hitBox = new Rectangle(this.x, this.y, this.shieldImage.getWidth(), this.shieldImage.getHeight());
+        this.captured = false;
     }
 
     @Override
     public void drawImage(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(this.shieldImage, x, y, null);
+    }
+
+    @Override
+    public boolean getCaptured() {
+        return this.captured;
+    }
+
+    @Override
+    public void setCaptured(boolean captured) {
+        this.captured = captured;
+    }
+
+    @Override
+    public void reset() {
+        this.x = x;
+        this.y = y;
+        try {
+            shieldImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/shield.png")));
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+        this.hitBox = new Rectangle(this.x, this.y, this.shieldImage.getWidth(), this.shieldImage.getHeight());
     }
 
     @Override
@@ -59,5 +85,6 @@ public class ShieldPowerUp extends PowerUp {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
+        this.captured = true;
     }
 }

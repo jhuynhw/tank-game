@@ -22,6 +22,7 @@ public class SpeedBoostPowerUp extends PowerUp {
     Rectangle hitBox;
     int x, y;
     BufferedImage speedImage;
+    public boolean captured;
 
     public SpeedBoostPowerUp(int x, int y) {
         this.x = x;
@@ -34,12 +35,37 @@ public class SpeedBoostPowerUp extends PowerUp {
             ex.printStackTrace();
         }
         this.hitBox = new Rectangle(this.x, this.y, this.speedImage.getWidth(), this.speedImage.getHeight());
+        this.captured = false;
     }
 
     @Override
     public void drawImage(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(this.speedImage, x, y, null);
+    }
+
+    @Override
+    public boolean getCaptured() {
+        return this.captured;
+    }
+
+    @Override
+    public void setCaptured(boolean captured) {
+        this.captured = captured;
+    }
+
+    @Override
+    public void reset() {
+        this.x = x;
+        this.y = y;
+        try {
+            speedImage = read(Objects.requireNonNull(TankRotation.class.getClassLoader().getResource("spritemap/speedBoostPowerUp.png")));
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+        this.hitBox = new Rectangle(this.x, this.y, this.speedImage.getWidth(), this.speedImage.getHeight());
     }
 
     @Override
@@ -58,5 +84,6 @@ public class SpeedBoostPowerUp extends PowerUp {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
+        this.captured = true;
     }
 }
