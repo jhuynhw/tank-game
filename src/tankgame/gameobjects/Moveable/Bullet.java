@@ -29,7 +29,6 @@ public class Bullet extends GameObject {
     Rectangle hitBox;
     public boolean hasCollided = false;
 
-    // todo: PLACEMENT OF BULLET CLASS CODE (and maybe TR) IS BAD, FIX OR MINUS HELLA POINTS
     public Bullet(int x, int y, float angle, BufferedImage bulletImage) {
         this.x = x;
         this.y = y;
