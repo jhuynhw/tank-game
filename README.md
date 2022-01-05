@@ -1,39 +1,37 @@
 # Tank Game
 
-## Johnathan Huynh
+### Johnathan Huynh
 
 ## Important Info
 
-### src Folder Purpose 
+#### src Folder Purpose 
 Stores source code.
 
-### resources Folder Purpose 
+#### resources Folder Purpose 
 Stores resources of tank game. This includes images, sounds, map text files, etc.
 
-`The src and resources folders can be deleted if you want a different file structure`
-
-### jar Folder Purpose 
+#### jar Folder Purpose 
 Stores the built jar of tank game.
 
-### Version of Java Used:
+#### Version of Java Used:
 - JDK 15
 
-### IDE used: 
+#### IDE used: 
 - Jet Brain’s IntelliJ IDEA 2020.3.2
 
-### Steps to Import project into IDE:
+#### Steps to Import project into IDE:
 1. git clone https://github.com/jhuynhw/tank-game.git
 2. Open IDE and import/open from existing source
 3. Select tank-game folder and import into IDE
 
-### Steps to Build your Project:
+#### Steps to Build your Project:
 1. Select the project that you want to build in the Projects window.
 2. Choose Run > Clean and Build Project (Shift+F11).
 
-### Steps to run your Project:
+#### Steps to run your Project:
 1. CTRL + SHIFT + F10 to run project
 
-### Controls to play Tank Game:
+#### Controls to play Tank Game:
 
 |               | Player 1 | Player 2 |
 |---------------|----------|----------|
