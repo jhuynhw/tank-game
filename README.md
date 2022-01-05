@@ -4,15 +4,6 @@
 
 ## Important Info
 
-### src Folder Purpose 
-Stores source code.
-
-### resources Folder Purpose 
-Stores resources of tank game. This includes images, sounds, map text files, etc.
-
-### jar Folder Purpose 
-Stores the built jar of tank game.
-
 ### Version of Java Used:
 - JDK 15
 
