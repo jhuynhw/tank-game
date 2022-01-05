@@ -1,6 +1,6 @@
 # Tank Game
 
-### Johnathan Huynh
+## Johnathan Huynh
 
 ## Important Info
 
