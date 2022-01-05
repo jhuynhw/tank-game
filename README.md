@@ -2,7 +2,7 @@
 
 ### Johnathan Huynh
 
-## Important Info
+# Important Info
 
 #### src Folder Purpose 
 Stores source code.
